@@ -1,0 +1,20 @@
+2024-01-05 17:57:01.270 -04:00 [INF] Now listening on: https://localhost:7070
+2024-01-05 17:57:01.293 -04:00 [INF] Now listening on: http://localhost:5125
+2024-01-05 17:57:01.294 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-01-05 17:57:01.295 -04:00 [INF] Hosting environment: Development
+2024-01-05 17:57:01.296 -04:00 [INF] Content root path: C:\Users\joser\source\repos\HoteListing.API\HoteListing.API
+2024-01-05 17:57:50.164 -04:00 [INF] Now listening on: https://localhost:7070
+2024-01-05 17:57:50.184 -04:00 [INF] Now listening on: http://localhost:5125
+2024-01-05 17:57:50.186 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-01-05 17:57:50.188 -04:00 [INF] Hosting environment: Development
+2024-01-05 17:57:50.189 -04:00 [INF] Content root path: C:\Users\joser\source\repos\HoteListing.API\HoteListing.API
+2024-01-05 17:57:50.549 -04:00 [INF] Now listening on: https://localhost:7070
+2024-01-05 17:57:50.570 -04:00 [INF] Now listening on: http://localhost:5125
+2024-01-05 17:57:50.571 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-01-05 17:57:50.572 -04:00 [INF] Hosting environment: Development
+2024-01-05 17:57:50.573 -04:00 [INF] Content root path: C:\Users\joser\source\repos\HoteListing.API\HoteListing.API
+2024-01-05 18:01:46.171 -04:00 [INF] Now listening on: https://localhost:7070
+2024-01-05 18:01:46.205 -04:00 [INF] Now listening on: http://localhost:5125
+2024-01-05 18:01:46.212 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2024-01-05 18:01:46.213 -04:00 [INF] Hosting environment: Development
+2024-01-05 18:01:46.215 -04:00 [INF] Content root path: C:\Users\joser\source\repos\HoteListing.API\HoteListing.API
