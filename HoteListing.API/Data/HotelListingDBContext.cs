@@ -13,6 +13,15 @@ namespace HoteListing.API.Data
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<Country> Countries { get; set; }
 
+
+        /*
+         * Run these two commands to update db using EF Core
+         * 
+         * Add-migration MigrationDescription
+         * update-database
+         */
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
