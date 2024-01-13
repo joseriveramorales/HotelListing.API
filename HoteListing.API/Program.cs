@@ -1,9 +1,21 @@
 // IoC container. This allows me to use things like dependency injection eventually.
 // More services can be introduced later
 
+using HoteListing.API.Configurations;
+using HoteListing.API.Contracts;
+using HoteListing.API.Data;
+using HoteListing.API.Repository;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+var connectionString = builder.Configuration.GetConnectionString("HotelListingDBConnectionString");
+builder.Services.AddDbContext<HotelListingDBContext>(options => {
+    options.UseSqlServer(connectionString);
+});
+
 
 // Add services to the container.
 
@@ -29,6 +41,14 @@ builder.Services.AddCors(option =>
 // I want to use Serilog, I create an instance of the builder (ctx), and the logger configuration (lc)
 // I ask the logger to Write to console, and read from the builder's Configuration (appsettings.json).
 builder.Host.UseSerilog((ctx, lc) => lc.WriteTo.Console().ReadFrom.Configuration(ctx.Configuration));
+
+// After I added the Nuget for Automapper and created my MapperConfig, 
+// proceed to inject the MapperConfig into my Services using AddAutoMapper()
+builder.Services.AddAutoMapper(typeof(MapperConfig));
+
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<ICountriesRepository, CountriesRepository>();
+
 
 var app = builder.Build();
 
