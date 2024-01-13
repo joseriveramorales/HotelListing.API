@@ -2,7 +2,9 @@
 // More services can be introduced later
 
 using HoteListing.API.Configurations;
+using HoteListing.API.Contracts;
 using HoteListing.API.Data;
+using HoteListing.API.Repository;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -43,6 +45,10 @@ builder.Host.UseSerilog((ctx, lc) => lc.WriteTo.Console().ReadFrom.Configuration
 // After I added the Nuget for Automapper and created my MapperConfig, 
 // proceed to inject the MapperConfig into my Services using AddAutoMapper()
 builder.Services.AddAutoMapper(typeof(MapperConfig));
+
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<ICountriesRepository, CountriesRepository>();
+
 
 var app = builder.Build();
 

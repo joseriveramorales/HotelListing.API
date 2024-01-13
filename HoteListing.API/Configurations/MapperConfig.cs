@@ -13,7 +13,7 @@ namespace HoteListing.API.Configurations
     /// </summary>
     public class MapperConfig : Profile
     {
-        public MapperConfig() 
+        public MapperConfig()
         {
             // Create Map specifices that I can create a Country using a CreateCountryDTO
             // ReverseMap specifies that I can use the reverse order, meaning create a CreateCountryDTO from a Country.
