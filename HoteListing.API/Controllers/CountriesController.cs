@@ -16,12 +16,12 @@ namespace HoteListing.API.Controllers
     [ApiController]
     public class CountriesController : ControllerBase
     {
-        private readonly ICountriesRepository _repository;
+        private readonly ICountriesRepository _countriesRepository;
         private readonly IMapper _mapper;
 
         public CountriesController(ICountriesRepository repository, IMapper mapper)
         {
-            _repository = repository;
+            _countriesRepository = repository;
             _mapper = mapper;
         }
 
@@ -29,7 +29,7 @@ namespace HoteListing.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GetCountryDTO>>> GetCountries()
         {
-            var countriesList = await _repository.GetAllAsync();
+            var countriesList = await _countriesRepository.GetAllAsync();
             var countryDtos = _mapper.Map<List<GetCountryDTO>>(countriesList);
             return Ok(countryDtos);
         }
@@ -39,7 +39,7 @@ namespace HoteListing.API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<CountryDTO>> GetCountry(int id)
         {
-            var country = await _repository.GetAsync(id);
+            var country = await _countriesRepository.GetAsync(id);
             if (country == null) 
             { 
                 return NotFound(); 
@@ -56,7 +56,7 @@ namespace HoteListing.API.Controllers
             if (id != updateCountryDTO.Id) { return BadRequest(); }
 
             // Always check that the item already exists in the DB.
-            var country = await _repository.GetAsync(id);
+            var country = await _countriesRepository.GetAsync(id);
             if (country == null) { return NotFound(); }
 
             // Here something a little different is happening,
@@ -67,7 +67,7 @@ namespace HoteListing.API.Controllers
 
             try
             {
-                await _repository.UpdateAsync(country);
+                await _countriesRepository.UpdateAsync(country);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -97,7 +97,7 @@ namespace HoteListing.API.Controllers
             // Use the injected Automapper instance _mapper to map dto into actual Country data model class.
             var country = _mapper.Map<Country>(countryDTO);
 
-            await _repository.AddAsync(country);
+            await _countriesRepository.AddAsync(country);
 
             return CreatedAtAction("GetCountry", new { id = country.Id }, country);
         }
@@ -108,7 +108,7 @@ namespace HoteListing.API.Controllers
         {
             try
             {
-                await _repository.DeleteAsync(id);
+                await _countriesRepository.DeleteAsync(id);
             }
             catch (ArgumentNullException)
             {
@@ -120,7 +120,7 @@ namespace HoteListing.API.Controllers
 
         private async Task<bool> CountryExists(int id)
         {
-            return await _repository.Exists(id);
+            return await _countriesRepository.Exists(id);
         }
     }
 }
