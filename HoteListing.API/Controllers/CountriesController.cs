@@ -34,7 +34,6 @@ namespace HoteListing.API.Controllers
             return Ok(countryDtos);
         }
 
-
         // GET: api/Countries/5
         [HttpGet("{id}")]
         public async Task<ActionResult<CountryDTO>> GetCountry(int id)
@@ -88,7 +87,6 @@ namespace HoteListing.API.Controllers
 
         /*
          * To prevent Overposting, I want to use DTO's. Mainly because I dont want to expose my Country Model into the API
-         * 
          */
 
         [HttpPost]
