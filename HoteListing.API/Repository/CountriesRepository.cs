@@ -15,6 +15,7 @@ namespace HoteListing.API.Repository
         
         public new async Task<Country> GetAsync(int? id)
         {
+
             if (id is null) return null;
             var country = await _context.Countries
                 .Include(country => country.Hotels)

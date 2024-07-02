@@ -4,6 +4,7 @@ using HoteListing.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HoteListing.API.Migrations
 {
     [DbContext(typeof(HotelListingDBContext))]
-    partial class HotelListingDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240516015630_AddedDefaultRoles")]
+    partial class AddedDefaultRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,13 +44,11 @@ namespace HoteListing.API.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("FirstName")
+                        .HasColumnType("int");
 
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("LastName")
+                        .HasColumnType("int");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -226,13 +227,13 @@ namespace HoteListing.API.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "ca33f84a-f434-4d0d-a2f8-7c64d1b90df7",
+                            Id = "bfc8ba98-057a-4f96-b346-1b583c8e21b9",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "76e422d8-f628-4989-9187-5bbcf39665de",
+                            Id = "95751bff-e0a2-415d-b0d1-d616bebea23b",
                             Name = "User",
                             NormalizedName = "USER"
                         });

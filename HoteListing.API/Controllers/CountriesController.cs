@@ -29,6 +29,7 @@ namespace HoteListing.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GetCountryDTO>>> GetCountries()
         {
+
             var countriesList = await _countriesRepository.GetAllAsync();
             var countryDtos = _mapper.Map<List<GetCountryDTO>>(countriesList);
             return Ok(countryDtos);
