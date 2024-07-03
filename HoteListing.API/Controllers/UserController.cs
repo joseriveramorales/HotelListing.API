@@ -1,6 +1,5 @@
 ﻿using HoteListing.API.Contracts;
 using HoteListing.API.Models.Users;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HoteListing.API.Controllers
@@ -37,5 +36,21 @@ namespace HoteListing.API.Controllers
 
             return Ok();
         }
+
+        // POST: api/User/Login
+        [HttpPost]
+        [Route("login")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> Login([FromBody] LoginDTO loginDto)
+        {
+            var authResponse = await _authManager.Login(loginDto);
+            if (authResponse == null)
+                return Unauthorized();
+            return Ok(authResponse);
+        }
+
+
     }
 }

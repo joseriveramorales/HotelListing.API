@@ -4,6 +4,7 @@ using HoteListing.API.Data;
 using HoteListing.API.Models.Country;
 using AutoMapper;
 using HoteListing.API.Contracts;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HoteListing.API.Controllers
 
@@ -14,6 +15,7 @@ namespace HoteListing.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CountriesController : ControllerBase
     {
         private readonly ICountriesRepository _countriesRepository;
