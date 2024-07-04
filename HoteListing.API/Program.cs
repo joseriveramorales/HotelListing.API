@@ -38,6 +38,7 @@ builder.Services.AddScoped<IDatabaseConnectionTester, DatabaseConnectionTester>(
 // Here Im registering APIUser my Subclass of IdentityUser
 builder.Services.AddIdentityCore<APIUser>()
     .AddRoles<IdentityRole>()  
+    .AddTokenProvider<DataProtectorTokenProvider<APIUser>>("HotelListingApi")
     .AddEntityFrameworkStores<HotelListingDBContext>();
 
 
@@ -125,6 +126,7 @@ app.UseHttpsRedirection();
 
 //app.UseCors("AllowAll");
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

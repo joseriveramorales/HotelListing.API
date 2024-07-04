@@ -15,7 +15,6 @@ namespace HoteListing.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class CountriesController : ControllerBase
     {
         private readonly ICountriesRepository _countriesRepository;
@@ -29,6 +28,7 @@ namespace HoteListing.API.Controllers
 
         // GET: api/Countries
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<GetCountryDTO>>> GetCountries()
         {
 
@@ -39,6 +39,7 @@ namespace HoteListing.API.Controllers
 
         // GET: api/Countries/5
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<CountryDTO>> GetCountry(int id)
         {
             var country = await _countriesRepository.GetAsync(id);
@@ -52,6 +53,7 @@ namespace HoteListing.API.Controllers
         // PUT: api/Countries/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> PutCountry(int id, UpdateCountryDTO updateCountryDTO)
         {
 
@@ -93,6 +95,7 @@ namespace HoteListing.API.Controllers
          */
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<Country>> PostCountry(CreateCountryDTO countryDTO)
         {
             // Use the injected Automapper instance _mapper to map dto into actual Country data model class.
@@ -105,6 +108,7 @@ namespace HoteListing.API.Controllers
 
         // DELETE: api/Countries/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DeleteCountry(int id)
         {
             try

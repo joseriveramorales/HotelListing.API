@@ -51,6 +51,18 @@ namespace HoteListing.API.Controllers
             return Ok(authResponse);
         }
 
-
+        // POST: api/User/refreshtoken
+        [HttpPost]
+        [Route("refreshtoken")]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> RefreshToken([FromBody] AuthResponseDto request)
+        {
+            var authResponse = await _authManager.VerifyRefreshToken(request);
+            if (authResponse == null)
+                return Unauthorized();
+            return Ok(authResponse);
+        }
     }
 }
