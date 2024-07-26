@@ -9,10 +9,8 @@ using HoteListing.API.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
-using System.Configuration;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -64,7 +62,9 @@ builder.Services.AddCors(option =>
 
 // I want to use Serilog, I create an instance of the builder (ctx), and the logger configuration (lc)
 // I ask the logger to Write to console, and read from the builder's Configuration (appsettings.json).
-builder.Host.UseSerilog((ctx, lc) => lc.WriteTo.Console().ReadFrom.Configuration(ctx.Configuration));
+builder.Host.UseSerilog((ctx, lc) => lc
+    .WriteTo.Console()
+    .ReadFrom.Configuration(ctx.Configuration));
 
 // After I added the Nuget for Automapper and created my MapperConfig, 
 // proceed to inject the MapperConfig into my Services using AddAutoMapper()
