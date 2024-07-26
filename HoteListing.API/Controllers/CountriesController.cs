@@ -4,6 +4,7 @@ using HoteListing.API.Data;
 using HoteListing.API.Models.Country;
 using AutoMapper;
 using HoteListing.API.Contracts;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HoteListing.API.Controllers
 
@@ -27,16 +28,18 @@ namespace HoteListing.API.Controllers
 
         // GET: api/Countries
         [HttpGet]
+        [Authorize]
         public async Task<ActionResult<IEnumerable<GetCountryDTO>>> GetCountries()
         {
+
             var countriesList = await _countriesRepository.GetAllAsync();
             var countryDtos = _mapper.Map<List<GetCountryDTO>>(countriesList);
             return Ok(countryDtos);
         }
 
-
         // GET: api/Countries/5
         [HttpGet("{id}")]
+        [Authorize]
         public async Task<ActionResult<CountryDTO>> GetCountry(int id)
         {
             var country = await _countriesRepository.GetAsync(id);
@@ -50,6 +53,7 @@ namespace HoteListing.API.Controllers
         // PUT: api/Countries/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> PutCountry(int id, UpdateCountryDTO updateCountryDTO)
         {
 
@@ -88,10 +92,10 @@ namespace HoteListing.API.Controllers
 
         /*
          * To prevent Overposting, I want to use DTO's. Mainly because I dont want to expose my Country Model into the API
-         * 
          */
 
         [HttpPost]
+        [Authorize(Roles = "Administrator")]
         public async Task<ActionResult<Country>> PostCountry(CreateCountryDTO countryDTO)
         {
             // Use the injected Automapper instance _mapper to map dto into actual Country data model class.
@@ -104,6 +108,7 @@ namespace HoteListing.API.Controllers
 
         // DELETE: api/Countries/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DeleteCountry(int id)
         {
             try

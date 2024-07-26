@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using HoteListing.API.Data.Configurations;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace HoteListing.API.Data
 {
-    public class HotelListingDBContext : DbContext
+    public class HotelListingDBContext : IdentityDbContext<APIUser>
     {
         public HotelListingDBContext(DbContextOptions options) : base(options)
 
@@ -15,68 +17,21 @@ namespace HoteListing.API.Data
 
 
         /*
-         * Run these two commands to update db using EF Core
+         * Run these two commands to update db using EF Core, use the Package Manager Console
          * 
          * Add-migration MigrationDescription
          * update-database
+         * 
+         * Here Im using IEntityTypeConfiguration classes to simplify seed data for my db.
+         * each class handles adding default values to my intial DB
+         * each call to applyconfigurations uses the data. 
          */
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Country>().HasData( 
-                new Country
-                {
-                    Id = 1,
-                    Name = "Jamaica",
-                    ShortName = "JM"
-                },
-                new Country
-                {
-                    Id = 2,
-                    Name = "Bahamas",
-                    ShortName = "BS"
-                },
-                new Country
-                {
-                    Id = 3,
-                    Name = "Cayman Island",
-                    ShortName = "CI"
-                },
-                new Country
-                {
-                    Id = 4,
-                    Name = "Puerto Rico",
-                    ShortName = "PR"
-                });
-
-            modelBuilder.Entity<Hotel>().HasData(
-                new Hotel
-                {
-                    Id = 1,
-                    Name = "Sandals Resort and Spa",
-                    Address = "Negril",
-                    CountryId = 1,
-                    Rating = 4.5
-                },
-                new Hotel
-                {
-                    Id = 2,
-                    Name = "Comfort Suites",
-                    Address = "George Town",
-                    CountryId = 3,
-                    Rating = 4.3
-                },
-                new Hotel
-                {
-                    Id = 3,
-                    Name = "Grand Palladium",
-                    Address = "Nassua",
-                    CountryId = 2,
-                    Rating = 5
-                });
+            modelBuilder.ApplyConfiguration(new RoleConfiguration());
+            modelBuilder.ApplyConfiguration(new CountryConfiguration());
+            modelBuilder.ApplyConfiguration(new HotelConfiguration());
         }
-
     }
 }
